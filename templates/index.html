@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    {{template "head" "Kassenbuch"}}
+    <body>
+        <section class="section">
+            <div class="container">
+                <div class="content">
+                    Ein Wochenende mit Freunden unterwegs, jeder bezahlt etwas und am Ende wollt ihr bla bla bla.
+                </div>
+            </div>
+            <div class="container is-flex is-justify-content-center">
+                <form action="{{path "cashbooks"}}" method="POST">
+                    <input type="text" class="input validate-required" name="tripName" placeholder="Name" />
+                    <button type="submit" class="button is-link">
+                        Neues Kassenbuch erstellen
+                    </button>
+                </form>
+            </div>
+        </section>
+        {{template "footer"}}
+    </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    {{template "head" (printf "%s - %s" .TripName "Kassensturz")}}
+    <body>
+        <section class="section">
+            <div class="container">
+                {{template "nav" .CashbookId}}
+                <nav class="panel">
+                    <p class="panel-heading">Transaktionen</p>
+                    {{range .Transactions}}
+                        <a class="panel-block">
+                            <span class="panel-icon">
+                                <i class="fa-solid fa-handshake" aria-hidden="true"></i>
+                            </span>
+                            {{.From.Name}} muss {{currency .Amount}} an {{.To.Name}} überweisen.
+                        </a>
+                    {{end}}
+                </nav>
+            </div>
+        </section>
+        {{template "footer"}}
+    </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    {{template "head" (printf "%s - %s" .TripName "Kassenbuch")}}
+    <body>
+        <section class="section">
+            <div class="container">
+                {{template "nav" .Id}}
+                <nav class="panel">
+                    <p class="panel-heading">Ausgaben</p>
+                    <div class="panel-block">
+                        <form action="{{path (printf "cashbooks/%v/payments" .Id)}}" method="POST">
+                            <div class="input-row">
+                                <div class="field">
+                                    <div class="control">
+                                        <input type="text" class="input validate-required" name="amount" placeholder="Betrag" />
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="control">
+                                        <input type="text" class="input validate-required" name="description" placeholder="Beschreibung" />
+                                    </div>
+                                </div>    
+                                <div class="field">
+                                    <div class="control">    
+                                        <div class="select">
+                                            <select name="payer">
+                                                {{range .People}}
+                                                    <option value="{{.}}">{{.}}</option>
+                                                {{end}}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="button is-link">Ausgabe hinzufügen</button>
+                            </div>
+                        </form>
+                    </div>
+                    {{range .Payments}}
+                        <a class="panel-block">
+                            <span class="panel-icon money-green">
+                                <i class="fa-solid fa-money-bill-wave" aria-hidden="true"></i>
+                            </span>
+                            {{.Payer}} hat {{currency .Amount}} für {{.Description}} ausgegeben.
+                        </a>
+                    {{end}}
+                </nav>
+                <nav class="panel">
+                    <p class="panel-heading">Kosten</p>
+                    <div>
+                        <div class="panel-block">
+                            Gesamtkosten: {{currency .TotalCosts}}
+                        </div>
+                        <div class="panel-block">
+                            Kosten pro Person: {{currency .IndividualCosts}}
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </section>
+        {{template "footer"}}
+    </body>
+</html>

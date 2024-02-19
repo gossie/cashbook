@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    {{template "head" (printf "%s - %s" .TripName "Gästeliste")}}
+    <body>
+        <section class="section">
+            <div class="container">
+                {{template "nav" .Id}}
+                <nav class="panel">
+                    <p class="panel-heading">
+                        Gästeliste
+                        <span class="panel-icon" title="Trag hier alle ein, auf die die Kosten aufgeteilt werden sollen">
+                            <i class="fa-solid fa-circle-question" aria-hidden="true"></i>
+                        </span>
+                    </p>
+                    <div class="panel-block">
+                        <form action="{{path (printf "cashbooks/%v/participants" .Id)}}" method="POST">
+                            <div style="display: flex; justify-content: space-between;">
+                                <input type="text" class="input validate-required" name="participantName" placeholder="Name" />
+                                <button type="submit" class="button is-link">Gast hinzufügen</button>
+                            </div>
+                        </form>
+                    </div>
+                    {{range .People}}
+                        <a class="panel-block">
+                            <span class="panel-icon">
+                                <i class="fa-solid fa-user" aria-hidden="true"></i>
+                            </span>
+                            {{.}}
+                        </a>
+                    {{end}}
+                </nav>
+            </div>
+        </section>
+        {{template "footer"}}
+    </body>
+</html>

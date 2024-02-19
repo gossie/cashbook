@@ -1,0 +1,10 @@
+.money-green {
+    color: #00AA00
+}
+
+@media (min-width: 800px) {
+    .input-row {
+        display: flex;
+        justify-content: space-between;
+    }
+}
